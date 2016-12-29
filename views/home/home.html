@@ -1,0 +1,38 @@
+<ion-view view-title="Hi! {{user.name}}" hide-back-button="true" ng-init="initHome()">
+    <ion-nav-buttons  side="right">
+        <a class="button button-icon icon ion-gear-a" ng-click="goSetting()"></a>
+        <a class="button button-icon icon ion-android-exit" ng-click="logOut()"></a>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="padding-top">
+        <form id="home-form6" class="list ">
+            <label class="item item-select " id="home-select1">
+                <span class="input-label">Select Station</span>
+                <select ng-model="data.selectedStation" class="ion-input-select" ng-change="onStationChange()">
+                  <option ng-repeat="station in stations" value="{{station.station_id}}">{{station.station_name}}</option>
+                </select>
+            </label>
+        </form>
+        <ion-list id="home-list3" class=" ">
+            <!--<ion-item ng-repeat="field in fields" >
+                <canvas piechart options="charOption" data="getPieData(field.current_volume,field.field_volume)" width="200" height="200"></canvas>-->
+            <!--<ion-item ng-repeat="field in fields" class="item-thumbnail-left">
+                <img ng-src="img/ionic.png">
+                <h2>{{field.field_name}}</h2>
+                <p>{{field.field_volume}}</p>
+                <p>{{field.current_volume}}</p>
+
+            </ion-item>-->
+            <!--<ion-item class="item-thumbnail-left item-icon-right  " id="home-list-item1" ui-sref="detail">
+                <h2>Cay xang cong hoa</h2>
+                <p style="white-space:normal;">thể tích bồn:5000l</p>
+                <i class="icon ion-ios-arrow-right icon-accessory"></i>
+            </ion-item>-->
+            <ion-item ng-repeat="field in fields" class="item-chart-left" ng-click="goDetail($index)">
+                <canvas donutchart options="chartOption" data="getPieData($index)" width="100" height="100"></canvas>
+                <h2>{{field.field_name}}</h2>
+                <p>Capacity: {{field.field_volume}}</p>
+                <p>Current Volumn: {{field.current_volume}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

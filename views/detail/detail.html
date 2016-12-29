@@ -1,0 +1,59 @@
+<ion-view view-title="Field Detail" hide-back-button="false" ng-init="initDetail()">
+    <ion-nav-buttons side="right">
+        <a ng-show="!showChart" class="button button-icon icon ion-stats-bars" ng-click="updateMode()"></a>
+        <a ng-show="showChart" class="button button-icon icon ion-clipboard" ng-click="updateMode()"></a>
+        <a class="button button-icon icon ion-android-exit" ng-click="logOut()"></a>
+    </ion-nav-buttons>
+    <ion-content scroll="true">
+        <div class="card">
+            <div class="row">
+                <div class="col col-75">
+                    <label class="item-input item-floating-label">
+                <span class="input-label">Request Date</span>
+                <input type="date" ng-model="dateRequest" placeholder="Request Date">
+                </label>
+                </div>
+                <div class="col col-25 center">
+                    <button class="button icon ion-ios-loop-strong button-positive" ng-click="refeshData()"></button>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="!showChart" class="card">
+            <div class="item item-divider">
+                Gas volumn report
+            </div>
+
+            <div class="flex-container wrap" style="background: #cdcdcd;">
+                <div class="column ng-binding">Date&nbsp;</div>
+                <div class="column ng-binding">Current Volumnt&nbsp;</div>
+            </div>
+            <ion-scroll zooming="false" direction="y" style="width: 100%; height: 400px">
+                <ion-list style="width: 100%; height: 100%">
+                    <div class="item col-header item-icon-right">
+                    </div>
+                    <div class="item low-pad-item item-icon-right" ng-repeat="item in items">
+                        <div class="flex-container wrap">
+                            <div class="column ng-binding">{{item.measured_date}}</div>
+                            <div class="column ng-binding">{{item.volume}}</div>
+                        </div>
+                    </div>
+                </ion-list>
+            </ion-scroll>
+            <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMore()" on-infinite="loadMoreData()" distance="10%">
+            </ion-infinite-scroll>
+        </div>
+        <div class="card" ng-if="showChart">
+            <div class="item item-divider">
+                Gas volumn Chart
+            </div>
+            <ion-scroll zooming="false" direction="x" style="width: 100%; height: 400px">
+                <div class="item item-text-wrap">
+                    <canvas chart="Line" options="chartOption" data="lineData" width="700" height="400"></canvas>
+                </div>
+            </ion-scroll>
+            <ion-infinite-scroll ng-if="moreDataCanBeLoaded()" on-infinite="loadMore()" on-infinite="loadMoreData()" distance="20%">
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>

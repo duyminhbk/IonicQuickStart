@@ -1,0 +1,28 @@
+<ion-view view-title="Change Password">
+  <ion-content class="padding-top" padding="true">
+    <div class="text-center padding">
+      <i class="icon ion-ios-infinite larger positive"></i>
+    </div>
+    <form name="forgotForm" novalidate ng-submit="changePass()">
+      <div class="list">
+        <label class="item item-input item-floating-label">
+        <span class="input-label">Old Password</span>
+        <input  ng-model="data.oldPass" placeholder="Old Password" type="password">
+      </label>
+        <br/>
+        <label class="item item-input item-floating-label">
+        <span class="input-label">New Password</span>
+        <input  ng-model="data.newPass" placeholder="New Password" type="password">
+      </label>
+        <br/>
+        <label class="item item-input item-floating-label">
+        <span class="input-label">Confirm Password</span>
+        <input  ng-model="data.confirmPass" placeholder="Confirm Password" type="password">
+      </label>
+        <div class="padding-top">
+          <input type="submit" value="Change my password" class="button button-block button-positive" />
+        </div>
+    </form>
+    
+  </ion-content>
+</ion-view>
